@@ -14,42 +14,70 @@ class Tableau1 extends Phaser.Scene {
 
     create() {
 
-
-
-
-
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
         backgroundImage.setScale(2, 0.8);
 
         const map = this.make.tilemap({key: 'map'});
 
         const tileset = map.addTilesetImage('tileset_base', 'tiles');
-        this.platforms = map.createStaticLayer('Platforms', tileset);
+        this.platforms = map.createLayer('Platforms', tileset);
 
-        this.platforms.setCollisionByExclusion(-1, true);
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
 
         this.player = new Player(this)
 
-        this.cameras.main.startFollow(this.player.player,false);
+        this.cameras.main.startFollow(this.player.s,true);
 
         this.spikes = this.physics.add.group({
             allowGravity: false,
             immovable: true,
         })
 
+        this.Collider = this.physics.add.group({
+            allowGravity: false,
+            immovable: true,
+        })
+
+
+
         map.getObjectLayer('Spikes').objects.forEach((spike) => {
-            const spikeSprite = this.spikes.create(spike.x, spike.y + 200 - spike.heigth, 'spike').setOrigin(0);
+            const spikeSprite = this.add.rectangle(spike.x + spike.width*0.5, spike.y + spike.height*0.5, spike.width, spike.height)
+            this.spikes.add(spikeSprite);
+        });
+
+        map.getObjectLayer('Collider').objects.forEach((obj) =>{
+            const collider = this.add.rectangle(obj.x + obj.width*0.5, obj.y + obj.height*0.5, obj.width, obj.height)
+            this.Collider.add(collider);
+        })
+
+        this.physics.add.collider(this.player.s, this.spikes, this.playerHit,null, this);
+        this.physics.add.collider(this.player.s, this.Collider);
+    }
+
+    playerHit(player, spike) {
+        player.setVelocity(0, 0);
+        player.setX(50);
+        player.setY(100);
+        player.play('idle', true);
+        player.setAlpha(0);
+        let tw = this.tweens.add({
+            targets: player,
+            alpha: 1,
+            duration: 100,
+            ease: 'linear',
+            repeat: 5,
         });
     }
+
+
 
 
     update() {
 
         switch (true) {
-            case (this.cursors.space.isDown || this.cursors.up.isDown) && this.player.player.body.onFloor():
+            case (this.cursors.space.isDown || this.cursors.up.isDown) && this.player.s.body.onFloor():
                 this.player.jump()
                 console.log("oui")
                 break;
@@ -65,3 +93,4 @@ class Tableau1 extends Phaser.Scene {
 
     }
 }
+
