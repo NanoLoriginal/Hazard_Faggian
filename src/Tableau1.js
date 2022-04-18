@@ -1,14 +1,14 @@
 class Tableau1 extends Phaser.Scene {
 
     preload() {
-        this.load.image('background', 'assets/images/background.png');
-        this.load.image('spike', 'assets/images/spike.png');
+        this.load.image('background', 'assets/images/background.png');//image de fond
+        this.load.image('spike', 'assets/images/spike.png');//on charge l'image de l'objet piques
         // At last image must be loaded with its JSON
-        this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
-        this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');
+        this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');//on charge le joueur
+        this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');//on charge le tileset qui contient les éléments utilisés dans tiled
 
         // Load the export Tiled JSON
-        this.load.tilemapTiledJSON('map', 'assets/tilemaps/Alpha1.json');
+        this.load.tilemapTiledJSON('map', 'assets/tilemaps/level1.json');
     }
 
 
@@ -19,13 +19,15 @@ class Tableau1 extends Phaser.Scene {
 
 
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
-        backgroundImage.setScale(1, 0.8);
+        backgroundImage.setScale(2, 0.8);
+
         const map = this.make.tilemap({key: 'map'});
 
-        const tileset = map.addTilesetImage('Alpha_test1', 'tiles');
-        this.platforms = map.createStaticLayer('Sol', tileset);
+        const tileset = map.addTilesetImage('tileset_base', 'tiles');
+        this.platforms = map.createStaticLayer('Platforms', tileset);
 
         this.platforms.setCollisionByExclusion(-1, true);
+
         this.cursors = this.input.keyboard.createCursorKeys();
 
 
