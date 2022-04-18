@@ -34,6 +34,15 @@ class Tableau1 extends Phaser.Scene {
         this.player = new Player(this)
 
         this.cameras.main.startFollow(this.player.player,false);
+
+        this.spikes = this.physics.add.group({
+            allowGravity: false,
+            immovable: true,
+        })
+
+        map.getObjectLayer('Spikes').objects.forEach((spike) => {
+            const spikeSprite = this.spikes.create(spike.x, spike.y + 200 - spike.heigth, 'spike').setOrigin(0);
+        });
     }
 
 
@@ -53,10 +62,6 @@ class Tableau1 extends Phaser.Scene {
             default:
                 this.player.stop();
         }
-
-
-
-
 
     }
 }

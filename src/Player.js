@@ -11,6 +11,7 @@ class Player {
 
         this.scene.physics.add.collider(this.player, this.scene.platforms);
 
+
         this.scene.anims.create({
             key: 'walk',
             frames: this.scene.anims.generateFrameNames('player', {
