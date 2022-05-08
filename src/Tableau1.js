@@ -24,6 +24,7 @@ class Tableau1 extends Phaser.Scene {
 
 
         this.cursors = this.input.keyboard.createCursorKeys();
+        this.changeFormKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G)
 
 
         this.player = new Player(this)
@@ -76,20 +77,53 @@ class Tableau1 extends Phaser.Scene {
 
     update() {
 
-        switch (true) {
-            case (this.cursors.space.isDown || this.cursors.up.isDown) && this.player.s.body.onFloor():
-                this.player.jump()
-                console.log("oui")
-                break;
-            case this.cursors.left.isDown:
-                this.player.moveLeft()
-                break;
-            case this.cursors.right.isDown:
-                this.player.moveRight();
-                break;
-            default:
-                this.player.stop();
+
+        if (this.player.ActualForm == 0){
+            switch (true) {
+                case (this.cursors.space.isDown || this.cursors.up.isDown) && this.player.s.body.onFloor():
+                    this.player.jump()
+                    console.log("oui")
+                    break;
+                case this.cursors.left.isDown:
+                    this.player.moveLeft()
+                    break;
+                case this.cursors.right.isDown:
+                    this.player.moveRight();
+                    break;
+                case Phaser.Input.Keyboard.JustDown(this.changeFormKey):
+                    console.log('changement de forme')
+                    this.player.ChangeForm();
+
+                    console.log(this.player.ActualForm)
+                    if (this.player.ActualForm == 0){
+                        this.player.s.body.setAllowGravity(true);
+                    }
+                    else{
+                        this.player.s.body.setAllowGravity(false);
+                    }
+                    break;
+                default:
+                    this.player.stop();
+            }
         }
+        else{
+            console.log('yes')
+            switch (true){
+                case Phaser.Input.Keyboard.JustDown(this.changeFormKey):
+                    console.log('changement de forme')
+                    this.player.ChangeForm();
+
+                    console.log(this.player.ActualForm)
+                    if (this.player.ActualForm == 0){
+                        this.player.s.body.setAllowGravity(true);
+                    }
+                    else{
+                        this.player.s.body.setAllowGravity(false);
+                    }
+                    break;
+            }
+        }
+
 
     }
 }

@@ -14,6 +14,9 @@ class Player {
 
         this._player.setBounce(0.1);
         this._player.setCollideWorldBounds(false);
+        this.ActualForm = 0;
+
+
 
         //this.scene.physics.add.collider(this._player, this.scene.platforms);
 
@@ -65,4 +68,16 @@ class Player {
             this._player.play('idle',true)
         }
     }
+
+    ChangeForm(){
+        if (this.ActualForm == 0){
+            this.ActualForm = 1;
+        }
+        else{
+            this.ActualForm = 0;
+
+        }
+    }
+
+
 }
