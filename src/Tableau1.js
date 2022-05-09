@@ -3,6 +3,7 @@ class Tableau1 extends Phaser.Scene {
     preload() {
         this.load.image('background', 'assets/images/background.png');//image de fond
         this.load.image('spike', 'assets/images/spike.png');//on charge l'image de l'objet piques
+        this.load.image('feu', 'assets/images/feu.png');
         // At last image must be loaded with its JSON
         this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');//on charge le joueur
         this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');//on charge le tileset qui contient les éléments utilisés dans tiled
@@ -94,7 +95,6 @@ class Tableau1 extends Phaser.Scene {
 
 
     update() {
-
         if(this.player.ActualForm==0){
             if (this.cursors.left.isDown)
             {
@@ -150,62 +150,6 @@ class Tableau1 extends Phaser.Scene {
             }
         }
 
-
-
-
-        /**
-        if (this.player.ActualForm == 0){
-
-            switch (true) {
-
-                case Phaser.Input.Keyboard.JustDown(this.changeFormKey):
-                    this.player.ChangeForm();
-                    break;
-
-                case (this.cursors.space.isDown || this.cursors.up.isDown) && this.player.s.body.onFloor():
-                    this.player.jump()
-                    console.log("oui")
-                    break;
-
-                case this.cursors.left.isDown:
-                    this.player.moveLeft()
-                    break;
-                case this.cursors.right.isDown:
-                    this.player.moveRight();
-                    break;
-                default:
-                    this.player.stop();
-            }
-        }
-
-        else{
-
-            switch (){
-                case Phaser.Input.Keyboard.JustDown(this.changeFormKey):
-                    this.player.ChangeForm();
-                    break;
-
-                case (this.cursors.space.isDown || this.cursors.up.isDown) :
-                    this.player.jump()
-                    break;
-
-                case (this.cursors.down.isDown):
-                    this.player.moveDown()
-                    break;
-
-                case this.cursors.left.isDown:
-                    this.player.moveLeft()
-                    break;
-
-                case this.cursors.right.isDown:
-                    this.player.moveRight();
-                    break;
-
-                default:
-                    this.player.s.setVelocity(0);
-            }
-        }
-        **/
     }
 }
 

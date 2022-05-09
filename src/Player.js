@@ -20,6 +20,9 @@ class Player {
 
         this.ActualForm = 0;
 
+        this.scene.input.on('pointerdown', (pointer)=> {
+                new Projectile(this.scene,pointer.worldX,pointer.worldY);
+        });
 
 
         this.scene.anims.create({
@@ -81,6 +84,19 @@ class Player {
      */
     get allVentSprite(){
         return this.scene.ventilations.getChildren().filter(toto=>toto.name==="ventSprite")
+    }
+
+    fire(){
+        if (game.time.now > this.nextFire && this.bullets.countDead() > 0)
+        {
+            this.nextFire = game.time.now + fireRate;
+
+            var bullet = bullets.getFirstDead();
+
+            bullet.reset(sprite.x - 8, sprite.y - 8);
+
+            game.physics.arcade.moveToPointer(bullet, 300);
+        }
     }
 
 
