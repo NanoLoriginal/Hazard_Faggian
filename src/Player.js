@@ -73,6 +73,9 @@ class Player {
             this._player.play('idle',true)
         }
     }
+    storeObj(player, ventilation){
+        this.obj= ventilation
+    }
 
     ChangeForm(){
         if (this.ActualForm == 0){
