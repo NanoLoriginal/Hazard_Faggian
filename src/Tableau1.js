@@ -24,6 +24,7 @@ class Tableau1 extends Phaser.Scene {
 
 
         this.cursors = this.input.keyboard.createCursorKeys();
+
         this.changeFormKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G)
 
 
@@ -40,7 +41,10 @@ class Tableau1 extends Phaser.Scene {
             allowGravity: false,
             immovable: true,
         })
-
+        /**
+         *
+         * @type {Phaser.Physics.Arcade.Group}
+         */
         this.ventilations = this.physics.add.group({
             allowGravity: false,
             immovable: true,
@@ -60,11 +64,15 @@ class Tableau1 extends Phaser.Scene {
         map.getObjectLayer('Ventilations').objects.forEach((vent)=>{
             this.ventSprite = this.add.rectangle(vent.x+vent.width*0.5,vent.y+vent.height*0.5, vent.width, vent.height)
             this.ventilations.add(this.ventSprite);
+            this.ventSprite.name="ventSprite";
         })
+
+        console.log("test ici",this.ventilations.getChildren().filter(toto=>toto.name==="ventSprite"))
+
 
         this.physics.add.collider(this.player.s, this.spikes, this.playerHit,null, this);
         this.physics.add.collider(this.player.s, this.Collider);
-        this.physics.add.collider(this.player.s, this.ventilations, this.player.storeObj(this.player.s, this.ventilations), null, this);
+        this.physics.add.collider(this.player.s, this.ventilations);
     }
 
     playerHit(player, spike) {
@@ -87,30 +95,78 @@ class Tableau1 extends Phaser.Scene {
 
     update() {
 
+        if(this.player.ActualForm==0){
+            if (this.cursors.left.isDown)
+            {
+                this.player.moveLeft();
+            }
+            else if (this.cursors.right.isDown)
+            {
+                this.player.moveRight();
+            }
+            else
+            {
+                this.player.stop();
+            }
 
+            if (this.cursors.up.isDown && this.player.s.body.onFloor())
+            {
+                this.player.jump();
+            }
+
+            if (Phaser.Input.Keyboard.JustDown(this.changeFormKey)){
+                console.log("changement de forme")
+                this.player.changeForm()
+            }
+        }
+        else{
+            if (this.cursors.left.isDown)
+            {
+                this.player.moveLeft();
+            }
+            else if (this.cursors.right.isDown)
+            {
+                this.player.moveRight();
+            }
+            else
+            {
+                this.player.stop();
+            }
+
+            if (this.cursors.up.isDown)
+            {
+                this.player.jump();
+            }
+            else if(this.cursors.down.isDown){
+                this.player.moveDown();
+            }
+            else{
+                this.player.s.setVelocityY(0);
+            }
+
+            if (Phaser.Input.Keyboard.JustDown(this.changeFormKey)){
+                console.log("changement de forme")
+                this.player.changeForm()
+            }
+        }
+
+
+
+
+        /**
         if (this.player.ActualForm == 0){
+
             switch (true) {
 
-
                 case Phaser.Input.Keyboard.JustDown(this.changeFormKey):
-                    console.log('changement de forme')
                     this.player.ChangeForm();
-
-                    console.log(this.player.ActualForm)
-                    if (this.player.ActualForm == 0){
-                        this.player.s.body.setAllowGravity(true);
-
-                    }
-                    else{
-                        this.player.s.body.setAllowGravity(false);
-
-                        this.ventilations.clear()
-                    }
                     break;
+
                 case (this.cursors.space.isDown || this.cursors.up.isDown) && this.player.s.body.onFloor():
                     this.player.jump()
                     console.log("oui")
                     break;
+
                 case this.cursors.left.isDown:
                     this.player.moveLeft()
                     break;
@@ -121,36 +177,26 @@ class Tableau1 extends Phaser.Scene {
                     this.player.stop();
             }
         }
+
         else{
-            console.log('yes')
 
-            switch (true){
+            switch (){
                 case Phaser.Input.Keyboard.JustDown(this.changeFormKey):
-                    console.log('changement de forme')
                     this.player.ChangeForm();
-
-                    console.log(this.player.ActualForm)
-                    if (this.player.ActualForm == 0){
-                        this.player.s.body.setAllowGravity(true);
-                        this.ventilations.add(this.ventSprite)
-                    }
-                    else{
-                        this.player.s.body.setAllowGravity(false);
-
-                    }
                     break;
 
                 case (this.cursors.space.isDown || this.cursors.up.isDown) :
                     this.player.jump()
-                    console.log("oui")
                     break;
+
                 case (this.cursors.down.isDown):
                     this.player.moveDown()
-                    console.log("non")
                     break;
+
                 case this.cursors.left.isDown:
                     this.player.moveLeft()
                     break;
+
                 case this.cursors.right.isDown:
                     this.player.moveRight();
                     break;
@@ -159,8 +205,7 @@ class Tableau1 extends Phaser.Scene {
                     this.player.s.setVelocity(0);
             }
         }
-
-
+        **/
     }
 }
 

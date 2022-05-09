@@ -14,11 +14,12 @@ class Player {
 
         this._player.setBounce(0.1);
         this._player.setCollideWorldBounds(false);
+
+        this.playerVelocityX = 300
+        this.playerVelocityY = 420
+
         this.ActualForm = 0;
 
-
-
-        //this.scene.physics.add.collider(this._player, this.scene.platforms);
 
 
         this.scene.anims.create({
@@ -47,23 +48,23 @@ class Player {
     }
 
     jump(){
-        this._player.setVelocityY(-420);
+        this._player.setVelocityY(-this.playerVelocityY);
         this._player.play('jump', true);
     }
     moveRight(){
-        this._player.setVelocityX(300);
+        this._player.setVelocityX(this.playerVelocityX);
         this._player.setFlipX(false);
         if (this._player.body.onFloor()) {
             this._player.play('walk', true)}
     }
     moveLeft(){
-        this._player.setVelocityX(-300);
+        this._player.setVelocityX(-this.playerVelocityX);
         if (this._player.body.onFloor()) {
             this._player.play('walk', true)}
         this._player.setFlipX(true);
     }
     moveDown(){
-        this._player.setVelocityY(420)
+        this._player.setVelocityY(this.playerVelocityY)
         this._player.play('jump', true);
     }
 
@@ -73,17 +74,40 @@ class Player {
             this._player.play('idle',true)
         }
     }
-    storeObj(player, ventilation){
-        this.obj= ventilation
+
+    /**
+     * Renvoie tous les ventSprite
+     * @return {Phaser.Physics.Arcade.sprite[]}
+     */
+    get allVentSprite(){
+        return this.scene.ventilations.getChildren().filter(toto=>toto.name==="ventSprite")
     }
 
-    ChangeForm(){
-        if (this.ActualForm == 0){
+
+    changeForm(){
+        if (this.ActualForm === 0){
+            this._player.setVelocity(0,0)
+            this._player.body.setAllowGravity(false);
+            this.playerVelocityX = 420;
+
+
+
+            this.allVentSprite.forEach(sprite=>{
+                sprite.body.enable=false
+                //sprite.
+                //sprite.body.disableBody(true,true)
+            })
+
             this.ActualForm = 1;
         }
         else{
+            this._player.body.setAllowGravity(true);
+            this.playerVelocityX = 300;
+            this.allVentSprite.forEach(sprite=>{
+                sprite.body.enable=true
+                //sprite.body.enableBody()
+            })
             this.ActualForm = 0;
-
         }
     }
 }
