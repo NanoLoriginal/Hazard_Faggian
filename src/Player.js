@@ -62,6 +62,11 @@ class Player {
             this._player.play('walk', true)}
         this._player.setFlipX(true);
     }
+    moveDown(){
+        this._player.setVelocityY(420)
+        this._player.play('jump', true);
+    }
+
     stop(){
         this._player.setVelocityX(0);
         if (this._player.body.onFloor()) {
@@ -78,6 +83,4 @@ class Player {
 
         }
     }
-
-
 }
