@@ -64,7 +64,11 @@ class Player {
             : this._player.x + this._player.width * 0.75
         this.scene.swordHitBox.y = this._player.y;
 
+
         this.scene.physics.world.add(this.scene.swordHitBox.body)
+
+
+
 
     }
 

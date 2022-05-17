@@ -79,7 +79,7 @@ class Tableau1 extends Phaser.Scene {
 
 
 
-        this.swordHitBox = this.add.rectangle(0,0,32,64,0xffffff,0.5);
+        this.swordHitBox = this.add.rectangle(0,0,32,64,0xffffff,0);
         this.physics.add.existing(this.swordHitBox);
         console.log(this.swordHitBox.body);
         this.swordHitBox.body.setAllowGravity(false);
@@ -94,10 +94,14 @@ class Tableau1 extends Phaser.Scene {
 
         this.physics.add.overlap(this.swordHitBox, this.ennemyBox, this.handleCollide, undefined, this);
 
+
     }
 
     handleCollide(object1, object2){
         console.log("touché")
+        
+        this.swordHitBox.body.enable = false
+        this.physics.world.remove(this.swordHitBox.body);
     }
 
     playerHit(player, spike) {
