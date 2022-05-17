@@ -1,5 +1,7 @@
 class Tableau1 extends Phaser.Scene {
 
+
+
     preload() {
         this.load.image('background', 'assets/images/background.png');//image de fond
         this.load.image('spike', 'assets/images/spike.png');//on charge l'image de l'objet piques
@@ -26,8 +28,8 @@ class Tableau1 extends Phaser.Scene {
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        this.changeFormKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G)
-
+        this.changeFormKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
+        this.attackKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         this.player = new Player(this)
 
@@ -74,6 +76,28 @@ class Tableau1 extends Phaser.Scene {
         this.physics.add.collider(this.player.s, this.spikes, this.playerHit,null, this);
         this.physics.add.collider(this.player.s, this.Collider);
         this.physics.add.collider(this.player.s, this.ventilations);
+
+
+
+        this.swordHitBox = this.add.rectangle(0,0,32,64,0xffffff,0.5);
+        this.physics.add.existing(this.swordHitBox);
+        console.log(this.swordHitBox.body);
+        this.swordHitBox.body.setAllowGravity(false);
+
+        this.swordHitBox.body.enable = false
+        this.physics.world.remove(this.swordHitBox.body);
+
+        this.ennemyBox = this.add.rectangle(480,600,64,64,0xffffff,0.5);
+        this.physics.add.existing(this.ennemyBox);
+        console.log(this.ennemyBox.body);
+        this.ennemyBox.body.setAllowGravity(false);
+
+        this.physics.add.overlap(this.swordHitBox, this.ennemyBox, this.handleCollide, undefined, this);
+
+    }
+
+    handleCollide(object1, object2){
+        console.log("touché")
     }
 
     playerHit(player, spike) {
@@ -118,7 +142,13 @@ class Tableau1 extends Phaser.Scene {
                 console.log("changement de forme")
                 this.player.changeForm()
             }
+
+            if(Phaser.Input.Keyboard.JustDown(this.attackKey)){
+                console.log("attaque");
+                this.player.swordAttack()
+            }
         }
+
         else{
             if (this.cursors.left.isDown)
             {
