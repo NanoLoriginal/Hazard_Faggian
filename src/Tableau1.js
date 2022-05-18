@@ -74,9 +74,12 @@ class Tableau1 extends Phaser.Scene {
         console.log("test ici",this.ventilations.getChildren().filter(toto=>toto.name==="ventSprite"))
 
 
-        this.physics.add.collider(this.player.s, this.spikes, this.playerHit,null, this);
+        this.physics.add.collider(this.player.s, this.spikes, this.playerHitSpike,null, this);
         this.physics.add.collider(this.player.s, this.Collider);
         this.physics.add.collider(this.player.s, this.ventilations);
+
+        this.physics.add.collider(this.player.s, this.ennemi1.s,this.playerHitEnnemi, null, this);
+
 
         this.physics.add.collider(this.ennemi1.s, this.Collider);
         this.physics.add.collider(this.ennemi1.s, this.ventilations);
@@ -94,22 +97,22 @@ class Tableau1 extends Phaser.Scene {
         this.ennemyBox = this.add.rectangle(480,600,64,64,0xffffff,0.5);
         this.physics.add.existing(this.ennemyBox);
         console.log(this.ennemyBox.body);
-        this.ennemyBox.body.setAllowGravity(false);
+        this.ennemyBox.body.setAllowGravity(false)
 
-        this.physics.add.overlap(this.swordHitBox, this.ennemyBox, this.handleCollide, undefined, this);
+        this.physics.add.overlap(this.swordHitBox, this.ennemi1.s, this.handleCollide, undefined, this);
 
 
     }
 
     handleCollide(object1, object2){
         console.log("touché")
-        console.log("touché")
         this.player.damageEnnemi(this.ennemi1)
         this.swordHitBox.body.enable = false
         this.physics.world.remove(this.swordHitBox.body);
     }
 
-    playerHit(player, spike) {
+    playerHitSpike(player, spike) {
+
         player.setVelocity(0, 0);
         player.setX(50);
         player.setY(100);
@@ -122,6 +125,62 @@ class Tableau1 extends Phaser.Scene {
             ease: 'linear',
             repeat: 5,
         });
+    }
+
+    playerHitEnnemi(player, ennemi) {
+        ennemi = this.ennemi1
+        console.log(this.player.playerHealth)
+
+        if (this.player.recovery === false){
+
+            player.x = player.flipX
+                ? player.setVelocityX(10)
+                : player.setVelocityX(-10)
+            player.y = player.y;
+            
+            this.player.playerHealth = this.player.playerHealth - this.ennemi1.ennemiDamages;
+            player.setAlpha(0);
+
+
+
+            let tw = this.tweens.add({
+                targets: player,
+                alpha: 1,
+                duration: 100,
+                ease: 'linear',
+                repeat: 5,
+            })
+            this.player.recovery = true;
+
+        }
+
+        if (this.player.recovery === true){
+            this.playerReset = this.time.addEvent({
+                delay: 1050,
+                callback: ()=>{
+
+                    this.player.recovery=false;
+                },
+                loop: false,
+            })
+        }
+
+        console.log(this.player.playerHealth)
+        if (this.player.playerHealth<0){
+            player.setVelocity(0, 0);
+            player.setX(50);
+            player.setY(100);
+            player.play('idle', true);
+            player.setAlpha(0);
+            let tw = this.tweens.add({
+                targets: player,
+                alpha: 1,
+                duration: 100,
+                ease: 'linear',
+                repeat: 5,
+            });
+        }
+
     }
 
 

@@ -22,6 +22,7 @@ class Player {
 
         this.playerHealth = 100;
         this.playerDamages = 20;
+        this.recovery = false;
 
 
         this.scene.input.on('pointerdown', (pointer)=> {
