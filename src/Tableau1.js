@@ -31,7 +31,8 @@ class Tableau1 extends Phaser.Scene {
         this.changeFormKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
         this.attackKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        this.player = new Player(this)
+        this.player = new Player(this);
+        this.ennemi1 = new Ennemi(this);
 
         this.cameras.main.startFollow(this.player.s,true);
 
@@ -77,6 +78,9 @@ class Tableau1 extends Phaser.Scene {
         this.physics.add.collider(this.player.s, this.Collider);
         this.physics.add.collider(this.player.s, this.ventilations);
 
+        this.physics.add.collider(this.ennemi1.s, this.Collider);
+        this.physics.add.collider(this.ennemi1.s, this.ventilations);
+
 
 
         this.swordHitBox = this.add.rectangle(0,0,32,64,0xffffff,0);
@@ -99,7 +103,7 @@ class Tableau1 extends Phaser.Scene {
 
     handleCollide(object1, object2){
         console.log("touché")
-        
+        this.player.damageEnnemi(this.ennemi1)
         this.swordHitBox.body.enable = false
         this.physics.world.remove(this.swordHitBox.body);
     }

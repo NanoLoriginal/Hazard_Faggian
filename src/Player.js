@@ -5,8 +5,6 @@ class Player {
     }
 
 
-
-
     constructor(scene) {
 
         this.scene=scene
@@ -21,6 +19,10 @@ class Player {
         this.playerVelocityY = 420
 
         this.ActualForm = 0;
+
+        this.playerHealth = 100;
+        this.playerDamages = 20;
+
 
         this.scene.input.on('pointerdown', (pointer)=> {
                 new Projectile(this.scene,pointer.worldX,pointer.worldY);
@@ -56,6 +58,11 @@ class Player {
 
     }
 
+    damageEnnemi(ennemi){
+        ennemi.ennemiHealth = ennemi.ennemiHealth - this.playerDamages;
+        console.log(ennemi.ennemiHealth);
+    }
+
     swordAttack(){
 
 
@@ -65,10 +72,13 @@ class Player {
         this.scene.swordHitBox.y = this._player.y;
 
 
+
+
         this.scene.physics.world.add(this.scene.swordHitBox.body)
 
-
-
+        this.scene.time.delayedCall(500,()=>{
+            this.scene.physics.world.remove(this.scene.swordHitBox.body)
+        })
 
     }
 
