@@ -1,6 +1,6 @@
 class Tableau1 extends Phaser.Scene {
 
-
+    //up
 
     preload() {
         this.load.image('background', 'assets/images/background.png');//image de fond
@@ -137,7 +137,7 @@ class Tableau1 extends Phaser.Scene {
                 ? player.setVelocityX(10)
                 : player.setVelocityX(-10)
             player.y = player.y;
-            
+
             this.player.playerHealth = this.player.playerHealth - this.ennemi1.ennemiDamages;
             player.setAlpha(0);
 
