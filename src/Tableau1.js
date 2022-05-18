@@ -103,6 +103,7 @@ class Tableau1 extends Phaser.Scene {
 
     handleCollide(object1, object2){
         console.log("touché")
+        console.log("touché")
         this.player.damageEnnemi(this.ennemi1)
         this.swordHitBox.body.enable = false
         this.physics.world.remove(this.swordHitBox.body);
