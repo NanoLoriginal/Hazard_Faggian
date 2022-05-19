@@ -161,7 +161,7 @@ class Tableau1 extends Phaser.Scene {
 
         if (this.player.recovery === true){
             this.playerReset = this.time.addEvent({
-                delay: 1050,
+                delay: 800,
                 callback: ()=>{
 
                     this.player.recovery=false;
