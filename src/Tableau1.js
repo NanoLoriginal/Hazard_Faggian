@@ -101,7 +101,7 @@ class Tableau1 extends Phaser.Scene {
 
         this.physics.add.overlap(this.swordHitBox, this.ennemi1.s, this.handleCollide, undefined, this);
 
-
+        this.resetBump = 0;
     }
 
     handleCollide(object1, object2){
@@ -128,15 +128,20 @@ class Tableau1 extends Phaser.Scene {
     }
 
     playerHitEnnemi(player, ennemi) {
+        this.resetBump = 1
         ennemi = this.ennemi1
         console.log(this.player.playerHealth)
 
         if (this.player.recovery === false){
 
-            player.x = player.flipX
-                ? player.setVelocityX(10)
-                : player.setVelocityX(-10)
-            player.y = player.y;
+            if (this.player.s.x< this.ennemi1.s.x){
+                player.setVelocity(-300,-300)
+            }
+            else{
+                player.setVelocity(300,-300)
+            }
+
+
 
             this.player.playerHealth = this.player.playerHealth - this.ennemi1.ennemiDamages;
             player.setAlpha(0);
@@ -160,6 +165,7 @@ class Tableau1 extends Phaser.Scene {
                 callback: ()=>{
 
                     this.player.recovery=false;
+                    this.resetBump = 0;
                 },
                 loop: false,
             })
@@ -190,15 +196,24 @@ class Tableau1 extends Phaser.Scene {
         if(this.player.ActualForm==0){
             if (this.cursors.left.isDown)
             {
-                this.player.moveLeft();
+                if (this.resetBump === 0){
+                    this.player.moveLeft();
+                }
+
             }
             else if (this.cursors.right.isDown)
             {
-                this.player.moveRight();
+                if (this.resetBump === 0){
+                    this.player.moveRight();
+                }
+
             }
             else
             {
-                this.player.stop();
+                if (this.resetBump === 0){
+                    this.player.stop();
+                }
+
             }
 
             if (this.cursors.up.isDown && this.player.s.body.onFloor())
