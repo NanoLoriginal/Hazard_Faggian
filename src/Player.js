@@ -62,6 +62,12 @@ class Player {
     damageEnnemi(ennemi){
         ennemi.ennemiHealth = ennemi.ennemiHealth - this.playerDamages;
         console.log(ennemi.ennemiHealth);
+
+        if (ennemi.ennemiHealth <=0){
+            ennemi.s.destroy()
+        }
+
+
     }
 
     swordAttack(){
