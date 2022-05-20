@@ -1,6 +1,5 @@
 class Tableau1 extends Phaser.Scene {
 
-    //up
 
     preload() {
         this.load.image('background', 'assets/images/background.png');//image de fond
@@ -36,6 +35,11 @@ class Tableau1 extends Phaser.Scene {
 
         this.cameras.main.startFollow(this.player.s,true);
 
+        this.projectiles = this.physics.add.group({
+            allowGravity : false,
+        })
+
+
         this.spikes = this.physics.add.group({
             allowGravity: false,
             immovable: true,
@@ -65,6 +69,8 @@ class Tableau1 extends Phaser.Scene {
             const collider = this.add.rectangle(obj.x + obj.width*0.5, obj.y + obj.height*0.5, obj.width, obj.height)
             this.Collider.add(collider);
         })
+
+
         map.getObjectLayer('Ventilations').objects.forEach((vent)=>{
             this.ventSprite = this.add.rectangle(vent.x+vent.width*0.5,vent.y+vent.height*0.5, vent.width, vent.height)
             this.ventilations.add(this.ventSprite);
@@ -100,6 +106,7 @@ class Tableau1 extends Phaser.Scene {
         this.ennemyBox.body.setAllowGravity(false)
 
         this.physics.add.overlap(this.swordHitBox, this.ennemi1.s, this.handleCollide, undefined, this);
+        this.physics.add.collider(this.projectiles, this.ennemi1.s)
 
         this.resetBump = 0;
     }

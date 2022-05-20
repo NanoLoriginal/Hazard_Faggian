@@ -4,6 +4,7 @@ class Projectile {
 
         this.scene = scene;
         const sprite = this.scene.physics.add.sprite(this.scene.player.s.x,this.scene.player.s.y,'feu').setTexture('feu').setDisplaySize(50, 50).setDepth(2000);
+        this.scene.projectiles.add(sprite)
         sprite.body.setAllowGravity(false);
         sprite.body.setMaxVelocityX(8000);
         sprite.body.setMaxVelocityX(8000);
