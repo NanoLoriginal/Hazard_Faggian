@@ -7,8 +7,10 @@ class Tableau1 extends Phaser.Scene {
         this.load.image('feu', 'assets/images/feu.png');
         // At last image must be loaded with its JSON
         this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');//on charge le joueur
+
         //this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');//on charge le tileset qui contient les éléments utilisés dans tiled
         this.load.image('tiles', 'assets/tilesets/tileset1_test.png');//on charge le tileset qui contient les éléments utilisés dans tiled
+
 
         // Load the export Tiled JSON
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/Map1_test.json');
@@ -17,13 +19,14 @@ class Tableau1 extends Phaser.Scene {
 
     create() {
 
-        const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
+        const backgroundImage = this.add.image(50, 50, 'background').setOrigin(0, 0);
         backgroundImage.setScale(10, 10);
 
 
         const map = this.make.tilemap({key: 'map'});
 
         const tileset = map.addTilesetImage('tileset1_test', 'tiles');
+
 
 
 
@@ -35,6 +38,7 @@ class Tableau1 extends Phaser.Scene {
         this.murs = map.createLayer('murs', tileset);
         this.platformes = map.createLayer('platformes', tileset);
         this.ventils = map.createLayer('ventils', tileset);
+
 
 
         this.cursors = this.input.keyboard.createCursorKeys();
