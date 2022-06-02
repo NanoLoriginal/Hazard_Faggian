@@ -2,7 +2,7 @@ class Tableau1 extends Phaser.Scene {
 
 
     preload() {
-        this.load.image('background', 'assets/images/background.png');//image de fond
+        this.load.image('background', 'assets/images/background_test.png');//image de fond
         //this.load.image('spike', 'assets/images/spike.png');//on charge l'image de l'objet piques
         this.load.image('feu', 'assets/images/feu.png');
         // At last image must be loaded with its JSON
