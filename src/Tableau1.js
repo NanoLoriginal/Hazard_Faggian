@@ -46,6 +46,7 @@ class Tableau1 extends Phaser.Scene {
             immovable: true,
         })
 
+
         this.Collider = this.physics.add.group({
             allowGravity: false,
             immovable: true,
@@ -60,23 +61,25 @@ class Tableau1 extends Phaser.Scene {
         })
 
 
-
+        /**
         map.getObjectLayer('Spikes').objects.forEach((spike) => {
             const spikeSprite = this.add.rectangle(spike.x + spike.width*0.5, spike.y + spike.height*0.5, spike.width, spike.height)
             this.spikes.add(spikeSprite);
         });
+        **/
 
         map.getObjectLayer('Collider').objects.forEach((obj) =>{
             const collider = this.add.rectangle(obj.x + obj.width*0.5, obj.y + obj.height*0.5, obj.width, obj.height)
             this.Collider.add(collider);
         })
 
-
+        /**
         map.getObjectLayer('Ventilations').objects.forEach((vent)=>{
             this.ventSprite = this.add.rectangle(vent.x+vent.width*0.5,vent.y+vent.height*0.5, vent.width, vent.height)
             this.ventilations.add(this.ventSprite);
             this.ventSprite.name="ventSprite";
         })
+        **/
 
         console.log("test ici",this.ventilations.getChildren().filter(toto=>toto.name==="ventSprite"))
 
