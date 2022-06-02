@@ -2,7 +2,7 @@ const config = {
     type: Phaser.AUTO,
     parent: 'game',
     width: 1600,
-    heigth: 900,
+    heigth: 1024,
     scale: {
         mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH

@@ -18,15 +18,23 @@ class Tableau1 extends Phaser.Scene {
     create() {
 
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
-        backgroundImage.setScale(2, 0.8);
-        backgroundImage.setDisplaySize(3000,3000);
+        backgroundImage.setScale(10, 10);
+
 
         const map = this.make.tilemap({key: 'map'});
 
         const tileset = map.addTilesetImage('tileset1_test', 'tiles');
+
+
+
         this.sol = map.createLayer('sol', tileset);
+
         this.decor1 = map.createLayer('décor', tileset);
         this.decor2 = map.createLayer('décor2', tileset);
+        this.decor3 = map.createLayer('décor3', tileset);
+        this.murs = map.createLayer('murs', tileset);
+        this.platformes = map.createLayer('platformes', tileset);
+        this.ventils = map.createLayer('ventils', tileset);
 
 
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -38,6 +46,7 @@ class Tableau1 extends Phaser.Scene {
         this.ennemi1 = new Ennemi(this);
 
         this.cameras.main.startFollow(this.player.s,true);
+        this.cameras.main.zoomTo(0.6);
 
         this.projectiles = this.physics.add.group({
             allowGravity : false,
