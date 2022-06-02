@@ -19,11 +19,14 @@ class Tableau1 extends Phaser.Scene {
 
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
         backgroundImage.setScale(2, 0.8);
+        backgroundImage.setDisplaySize(3000,3000);
 
         const map = this.make.tilemap({key: 'map'});
 
-        const tileset = map.addTilesetImage('tileset_base', 'tiles');
-        this.platforms = map.createLayer('sol', tileset);
+        const tileset = map.addTilesetImage('tileset1_test', 'tiles');
+        this.sol = map.createLayer('sol', tileset);
+        this.decor1 = map.createLayer('décor', tileset);
+        this.decor2 = map.createLayer('décor2', tileset);
 
 
         this.cursors = this.input.keyboard.createCursorKeys();
