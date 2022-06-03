@@ -4,7 +4,8 @@ class Tableau1 extends Phaser.Scene {
     preload() {
         this.load.image('background', 'assets/images/background_test.png');//image de fond
         this.load.image('light_effect', 'assets/images/light_effect.png');//effet de light
-        this.load.image('ciel', 'assets/images/ciel_test.jpg');//effet de light
+        this.load.image('ciel', 'assets/images/ciel_test.jpg');
+        this.load.image('enemy', 'assets/images/ennemi1.png');
 
         this.load.spritesheet('run','photoshop/spritesheet_run.png',{frameWidth: 245, frameHeight: 317});
         this.load.spritesheet('idle','photoshop/spritesheet_idle.png',{frameWidth: 244, frameHeight: 316});
@@ -207,7 +208,7 @@ class Tableau1 extends Phaser.Scene {
         this.ennemyBox.body.setAllowGravity(false)
 
         this.physics.add.overlap(this.swordHitBox, this.ennemi1.s, this.handleCollide, undefined, this);
-        this.physics.add.collider(this.projectiles, this.ennemi1.s)
+        this.physics.add.collider(this.projectiles, this.ennemi1.s, this.projectileCollide, undefined, this);
 
         this.resetBump = 0;
     }
@@ -218,6 +219,13 @@ class Tableau1 extends Phaser.Scene {
         this.swordHitBox.body.enable = false
         this.physics.world.remove(this.swordHitBox.body);
     }
+
+    projectileCollide(object1, object2){
+        console.log("touché")
+        this.player.damageEnnemi(this.ennemi1)
+        object2.destroy();
+    }
+
 
     playerHitSpike(player, spike) {
 
@@ -243,10 +251,10 @@ class Tableau1 extends Phaser.Scene {
         if (this.player.recovery === false){
 
             if (this.player.s.x< this.ennemi1.s.x){
-                player.setVelocity(-300,-300)
+                player.setVelocity(-600,-400)
             }
             else{
-                player.setVelocity(300,-300)
+                player.setVelocity(600,-400)
             }
 
 
@@ -301,6 +309,9 @@ class Tableau1 extends Phaser.Scene {
 
 
     update() {
+
+        this.ennemi1.update()
+
         if(this.player.ActualForm==0){
             if (this.cursors.left.isDown)
             {
@@ -370,6 +381,7 @@ class Tableau1 extends Phaser.Scene {
                 this.player.changeForm()
             }
         }
+
 
     }
 }
