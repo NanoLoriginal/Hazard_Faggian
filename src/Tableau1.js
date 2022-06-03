@@ -8,6 +8,8 @@ class Tableau1 extends Phaser.Scene {
         this.load.image('enemy', 'assets/images/ennemi1.png');
         this.load.image('fume', 'assets/images/cac.png');
         this.load.image('fumee1', 'assets/images/smoke.png');
+        this.load.image('touches', 'assets/images/touches.png');
+        this.load.image('tuto1', 'assets/images/tuto1.png');
 
         this.load.spritesheet('run','photoshop/spritesheet_run.png',{frameWidth: 245, frameHeight: 317});
         this.load.spritesheet('idle','photoshop/spritesheet_idle.png',{frameWidth: 244, frameHeight: 316});
@@ -133,6 +135,9 @@ class Tableau1 extends Phaser.Scene {
 
         this.attackKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
+        this.touches = this.add.image(400,2260,'touches');
+        this.tuto1 = this.add.image(1400,2200,'tuto1');
+
         this.player = new Player(this);
         this.ennemi1 = new Ennemi(this);
         this.ennemi1.s.x = 6920
@@ -234,7 +239,7 @@ class Tableau1 extends Phaser.Scene {
 
         this.resetBump = 0;
 
-        this.hit = this.add.particles('vert');
+        this.hit = this.add.particles('whiteP');
         this.hit.createEmitter({
             lifespan: 300,
             speed: 150,
@@ -442,6 +447,7 @@ class Tableau1 extends Phaser.Scene {
             if (Phaser.Input.Keyboard.JustDown(this.changeFormKey)){
                 console.log("changement de forme")
                 this.player.changeForm()
+                this.player.s.setTint(0);
                 this.transfo.emitParticleAt(this.player.s.x,this.player.s.y);
                 window.objet_fragment += 100;
             }
@@ -482,10 +488,9 @@ class Tableau1 extends Phaser.Scene {
             if (Phaser.Input.Keyboard.JustDown(this.changeFormKey)){
                 console.log("changement de forme")
                 this.player.changeForm()
+                this.player.s.setTint(99999999);
             }
         }
-
-
     }
 }
 
