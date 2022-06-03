@@ -10,7 +10,7 @@ class Player {
         this.scene=scene
         this.cameras=scene
 
-        this._player = this.scene.physics.add.sprite(1700, 1900, 'idle');
+        this._player = this.scene.physics.add.sprite(344, 2224, 'idle');
 
         this._player.setBounce(0.1);
         this._player.setCollideWorldBounds(false);

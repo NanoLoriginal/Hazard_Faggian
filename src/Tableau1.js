@@ -7,6 +7,7 @@ class Tableau1 extends Phaser.Scene {
         this.load.image('ciel', 'assets/images/ciel_test.jpg');
         this.load.image('enemy', 'assets/images/ennemi1.png');
         this.load.image('fume', 'assets/images/cac.png');
+        this.load.image('fumee1', 'assets/images/smoke.png');
 
         this.load.spritesheet('run','photoshop/spritesheet_run.png',{frameWidth: 245, frameHeight: 317});
         this.load.spritesheet('idle','photoshop/spritesheet_idle.png',{frameWidth: 244, frameHeight: 316});
@@ -194,7 +195,7 @@ class Tableau1 extends Phaser.Scene {
         console.log("test ici",this.ventilations.getChildren().filter(toto=>toto.name==="ventSprite"))
 
 
-        this.physics.add.collider(this.player.s, this.spikes, this.playerHitSpike,null, this);
+        //this.physics.add.collider(this.player.s, this.spikes, this.playerHitSpike,null, this);
         this.physics.add.collider(this.player.s, this.Collider);
         this.physics.add.collider(this.player.s, this.ventilations);
 
@@ -235,6 +236,18 @@ class Tableau1 extends Phaser.Scene {
             scale: { start: 0.2, end: 0 },
             on: false
         });
+
+
+        this.transfo = this.add.particles('fumee1');
+        this.transfo.createEmitter({
+            lifespan: 400,
+            speed: 2000,
+            quantity: 1000,
+            scale: { start: 0.5, end: 0 },
+            on: false
+        });
+
+
     }
 
     handleCollide(object1, object2){
@@ -421,6 +434,8 @@ class Tableau1 extends Phaser.Scene {
             if (Phaser.Input.Keyboard.JustDown(this.changeFormKey)){
                 console.log("changement de forme")
                 this.player.changeForm()
+                this.transfo.emitParticleAt(this.player.s.x,this.player.s.y);
+                window.objet_fragment += 100;
             }
 
             if(Phaser.Input.Keyboard.JustDown(this.attackKey)){
