@@ -6,6 +6,8 @@ class Tableau1 extends Phaser.Scene {
         this.load.image('light_effect', 'assets/images/light_effect.png');//effet de light
         this.load.image('ciel', 'assets/images/ciel_test.jpg');//effet de light
 
+        this.load.spritesheet('run','photoshop/spritesheet_run.png',{frameWidth: 245, frameHeight: 317});
+
         //this.load.image('spike', 'assets/images/spike.png');//on charge l'image de l'objet piques
         this.load.image('feu', 'assets/images/feu.png');
         // At last image must be loaded with its JSON
@@ -23,6 +25,20 @@ class Tableau1 extends Phaser.Scene {
 
 
     create() {
+
+
+        this.anims.create({
+            key:'running',
+            frames: this.anims.generateFrameNames('run', {
+
+                start: 0,
+                end: 6,
+
+            }),
+            frameRate: 24,
+            repeat: -1,
+        });
+
 
         //const cielImage = this.add.image(0, 0, 'ciel').setOrigin(0, 0);
         //cielImage.setScale(30, 30);

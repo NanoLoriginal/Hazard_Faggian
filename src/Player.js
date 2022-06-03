@@ -93,16 +93,17 @@ class Player {
         this._player.setVelocityY(-this.playerVelocityY);
         this._player.play('jump', true);
     }
+
     moveRight(){
         this._player.setVelocityX(this.playerVelocityX);
         this._player.setFlipX(false);
         if (this._player.body.onFloor()) {
-            this._player.play('walk', true)}
+            this._player.play('running', true)}
     }
     moveLeft(){
         this._player.setVelocityX(-this.playerVelocityX);
         if (this._player.body.onFloor()) {
-            this._player.play('walk', true)}
+            this._player.play('running', true)}
         this._player.setFlipX(true);
     }
     moveDown(){
