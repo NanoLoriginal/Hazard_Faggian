@@ -40,6 +40,7 @@ class Player {
 
         if (ennemi.ennemiHealth <=0){
             ennemi.s.destroy()
+            ennemi.s.vivant = false
         }
 
 

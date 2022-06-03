@@ -8,7 +8,11 @@ class Ennemi {
         this.scene = scene;
         this.cameras = scene;
 
-        this._ennemi = this.scene.physics.add.sprite(1900,1900, 'enemy');
+        this._ennemi = this.scene.physics.add.sprite(1900,1900, 'vert');
+        this._ennemi.setImmovable(true);
+        this._ennemi.setScale(0.6,0.6);
+        this._ennemi.body.setAllowGravity(false);
+
 
         this._ennemi.vivant=true;
 

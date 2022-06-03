@@ -10,6 +10,10 @@ class Tableau1 extends Phaser.Scene {
         this.load.spritesheet('run','photoshop/spritesheet_run.png',{frameWidth: 245, frameHeight: 317});
         this.load.spritesheet('idle','photoshop/spritesheet_idle.png',{frameWidth: 244, frameHeight: 316});
 
+
+        this.load.image('vert', 'assets/images/particles/green-orb.png');
+
+
         //this.load.image('spike', 'assets/images/spike.png');//on charge l'image de l'objet piques
         this.load.image('feu', 'assets/images/feu.png');
         // At last image must be loaded with its JSON
@@ -186,7 +190,7 @@ class Tableau1 extends Phaser.Scene {
 
         this.physics.add.collider(this.player.s, this.ennemi1.s,this.playerHitEnnemi, null, this);
 
-        this.physics.add.collider(this.player.s, this.allDeathZones,this.playerHitEnnemi, null, this);
+        this.physics.add.collider(this.player.s, this.allDeathZones,this.playerHitSpike, null, this);
 
 
         this.physics.add.collider(this.ennemi1.s, this.Collider);
@@ -194,7 +198,7 @@ class Tableau1 extends Phaser.Scene {
 
 
 
-        this.swordHitBox = this.add.rectangle(0,0,32,64,0xffffff,0);
+        this.swordHitBox = this.add.rectangle(0,0,64,200,0xffffff,0);
         this.physics.add.existing(this.swordHitBox);
         console.log(this.swordHitBox.body);
         this.swordHitBox.body.setAllowGravity(false);
@@ -228,19 +232,63 @@ class Tableau1 extends Phaser.Scene {
 
 
     playerHitSpike(player, spike) {
+        this.resetBump = 1
+        console.log(playerHealth)
 
-        player.setVelocity(0, 0);
-        player.setX(50);
-        player.setY(100);
-        player.play('idle', true);
-        player.setAlpha(0);
-        let tw = this.tweens.add({
-            targets: player,
-            alpha: 1,
-            duration: 100,
-            ease: 'linear',
-            repeat: 5,
-        });
+        if (this.player.recovery === false){
+
+            if (this.player.s.x< spike.body.x){
+                player.setVelocity(-600,-400)
+            }
+            else{
+                player.setVelocity(600,-400)
+            }
+
+
+
+            playerHealth = playerHealth - this.ennemi1.ennemiDamages;
+            player.setAlpha(0);
+
+
+
+            let tw = this.tweens.add({
+                targets: player,
+                alpha: 1,
+                duration: 100,
+                ease: 'linear',
+                repeat: 5,
+            })
+            this.player.recovery = true;
+
+        }
+
+        if (this.player.recovery === true){
+            this.playerReset = this.time.addEvent({
+                delay: 800,
+                callback: ()=>{
+
+                    this.player.recovery=false;
+                    this.resetBump = 0;
+                },
+                loop: false,
+            })
+        }
+
+        console.log(playerHealth)
+        if (playerHealth<0){
+            player.setVelocity(0, 0);
+            player.setX(50);
+            player.setY(100);
+            player.play('idle', true);
+            player.setAlpha(0);
+            let tw = this.tweens.add({
+                targets: player,
+                alpha: 1,
+                duration: 100,
+                ease: 'linear',
+                repeat: 5,
+            });
+        }
     }
 
     playerHitEnnemi(player, ennemi) {
