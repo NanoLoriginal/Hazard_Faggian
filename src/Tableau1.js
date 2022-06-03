@@ -114,6 +114,11 @@ class Tableau1 extends Phaser.Scene {
             immovable: true,
         })
 
+        this.allDeathZones = this.physics.add.group({
+            allowGravity: false,
+            immovable: true,
+        })
+
 
         /**
         map.getObjectLayer('Spikes').objects.forEach((spike) => {
@@ -134,6 +139,12 @@ class Tableau1 extends Phaser.Scene {
             this.ventSprite.name="ventSprite";
         })
 
+        map.getObjectLayer('dead_zone').objects.forEach((dead)=>{
+            this.deathZone = this.add.rectangle(dead.x+dead.width*0.5,dead.y+dead.height*0.5, dead.width, dead.height)
+            this.allDeathZones.add(this.deathZone);
+        })
+
+
 
         console.log("test ici",this.ventilations.getChildren().filter(toto=>toto.name==="ventSprite"))
 
@@ -143,6 +154,8 @@ class Tableau1 extends Phaser.Scene {
         this.physics.add.collider(this.player.s, this.ventilations);
 
         this.physics.add.collider(this.player.s, this.ennemi1.s,this.playerHitEnnemi, null, this);
+
+        this.physics.add.collider(this.player.s, this.allDeathZones,this.playerHitEnnemi, null, this);
 
 
         this.physics.add.collider(this.ennemi1.s, this.Collider);
