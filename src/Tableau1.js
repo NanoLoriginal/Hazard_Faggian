@@ -25,6 +25,11 @@ class Tableau1 extends Phaser.Scene {
         const backgroundImage = this.add.image(1200, 780, 'background').setOrigin(0, 0);
         backgroundImage.setScale(1.6, 1.15);
 
+        const backgroundImage2 = this.add.image(6150, 0, 'background').setOrigin(0, 0);
+        backgroundImage2.setScale(1.75, 1.7);
+
+
+
 
         const map = this.make.tilemap({key: 'map'});
 
@@ -36,9 +41,13 @@ class Tableau1 extends Phaser.Scene {
         this.fond3 = map.createLayer('fond3', tileset_background);
         this.fond2 = map.createLayer('fond2', tileset_background);
         this.fond1 = map.createLayer('fond1', tileset_background);
+        this.paralax2 = map.createLayer('paralax2', tileset_background);
+        this.paralax1 = map.createLayer('paralax1', tileset_background);
 
         const lightEffectImage = this.add.image(1200, 780, 'light_effect').setOrigin(0, 0);
         lightEffectImage.setScale(2.6, 2);
+
+
 
         this.auraLight2 = map.createLayer('aura_lumière2', tileset);
         this.auraLight = map.createLayer('aura_lumière1', tileset);
@@ -106,13 +115,13 @@ class Tableau1 extends Phaser.Scene {
             this.Collider.add(collider);
         })
 
-        /**
-        map.getObjectLayer('Ventilations').objects.forEach((vent)=>{
+
+        map.getObjectLayer('entree_ventilations').objects.forEach((vent)=>{
             this.ventSprite = this.add.rectangle(vent.x+vent.width*0.5,vent.y+vent.height*0.5, vent.width, vent.height)
             this.ventilations.add(this.ventSprite);
             this.ventSprite.name="ventSprite";
         })
-        **/
+
 
         console.log("test ici",this.ventilations.getChildren().filter(toto=>toto.name==="ventSprite"))
 

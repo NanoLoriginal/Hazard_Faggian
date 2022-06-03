@@ -10,13 +10,13 @@ class Player {
         this.scene=scene
         this.cameras=scene
 
-        this._player = this.scene.physics.add.sprite(50, 100, 'player');
+        this._player = this.scene.physics.add.sprite(1700, 1900, 'player');
 
         this._player.setBounce(0.1);
         this._player.setCollideWorldBounds(false);
 
-        this.playerVelocityX = 300
-        this.playerVelocityY = 420
+        this.playerVelocityX = 600
+        this.playerVelocityY = 640
 
         this.ActualForm = 0;
 
@@ -144,7 +144,7 @@ class Player {
         if (this.ActualForm === 0){
             this._player.setVelocity(0,0)
             this._player.body.setAllowGravity(false);
-            this.playerVelocityX = 420;
+            this.playerVelocityX = 680;
 
 
 
@@ -158,7 +158,7 @@ class Player {
         }
         else{
             this._player.body.setAllowGravity(true);
-            this.playerVelocityX = 300;
+            this.playerVelocityX = 600;
             this.allVentSprite.forEach(sprite=>{
                 sprite.body.enable=true
                 //sprite.body.enableBody()

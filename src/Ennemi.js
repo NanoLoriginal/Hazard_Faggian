@@ -8,7 +8,7 @@ class Ennemi {
         this.scene = scene;
         this.cameras = scene;
 
-        this._ennemi = this.scene.physics.add.sprite(400,50, 'player');
+        this._ennemi = this.scene.physics.add.sprite(1900,1900, 'player');
 
         this._ennemi.setBounce(0.1);
         this._ennemi.setCollideWorldBounds(false);
