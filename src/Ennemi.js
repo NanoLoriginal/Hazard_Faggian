@@ -14,6 +14,8 @@ class Ennemi {
         this._ennemi.body.setAllowGravity(false);
 
 
+
+
         this._ennemi.vivant=true;
 
         this._ennemi.setBounce(0.1);
@@ -31,7 +33,7 @@ class Ennemi {
     }
 
     update(){
-        if(Phaser.Math.Distance.Between(this.scene.player.s.x,this.scene.player.s.y,this._ennemi.x,this._ennemi.y)<500 && this._ennemi.vivant===true){
+        if(Phaser.Math.Distance.Between(this.scene.player.s.x,this.scene.player.s.y,this._ennemi.x,this._ennemi.y)<800 && this._ennemi.vivant===true){
             this.fire()
         }
     }
@@ -51,8 +53,8 @@ class Ennemi {
                 this.boule = this.scene.physics.add.sprite(this._ennemi.x,this._ennemi.y, 'feu').setSize(400,400).setDisplaySize(60,60);
                 this.boule.body.setAllowGravity(false);
                 this.scene.physics.moveTo(this.boule, this.scene.player.s.x, this.scene.player.s.y);
-                this.boule.setVelocityX(this.boule.body.velocity.x * 12)
-                this.boule.setVelocityY(this.boule.body.velocity.y * 12)
+                this.boule.setVelocityX(this.boule.body.velocity.x * 8)
+                this.boule.setVelocityY(this.boule.body.velocity.y * 8)
                 console.log('check')
                 const life = this.scene.time.delayedCall(4000, () => {
                     this.boule.destroy()
@@ -70,7 +72,7 @@ class Ennemi {
                     playerHealth-=10
                     boule.destroy()
                     life.destroy()
-                    //this.emitter.emit("toucher")
+                    //this.emitter.emit("greenP")
                     this.projectile = false
                 }, null, this)
 

@@ -25,12 +25,14 @@ class Player {
         this.recovery = false;
 
 
+
+
         this.scene.input.on('pointerdown', (pointer)=> {
                 new Projectile(this.scene,pointer.worldX,pointer.worldY);
         });
 
 
-        this._player.setBodySize(150,300);
+        this._player.setBodySize(150,250);
 
     }
 

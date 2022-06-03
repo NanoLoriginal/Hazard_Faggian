@@ -12,6 +12,7 @@ class Tableau1 extends Phaser.Scene {
 
 
         this.load.image('vert', 'assets/images/particles/green-orb.png');
+        this.load.image('greenP', 'assets/images/particles/green.png');
 
 
         //this.load.image('spike', 'assets/images/spike.png');//on charge l'image de l'objet piques
@@ -121,6 +122,9 @@ class Tableau1 extends Phaser.Scene {
 
         this.player = new Player(this);
         this.ennemi1 = new Ennemi(this);
+        this.ennemi1.s.x = 6920
+        this.ennemi1.s.y = 688
+
 
         this.cameras.main.startFollow(this.player.s,true);
         this.cameras.main.zoomTo(0.6);
@@ -213,6 +217,7 @@ class Tableau1 extends Phaser.Scene {
 
         this.physics.add.overlap(this.swordHitBox, this.ennemi1.s, this.handleCollide, undefined, this);
         this.physics.add.collider(this.projectiles, this.ennemi1.s, this.projectileCollide, undefined, this);
+        this.physics.add.collider(this.projectiles, this.Collider, this.projectileDestroy, undefined, this);
 
         this.resetBump = 0;
     }
@@ -228,6 +233,12 @@ class Tableau1 extends Phaser.Scene {
         console.log("touché")
         this.player.damageEnnemi(this.ennemi1)
         object2.destroy();
+
+    }
+
+    projectileDestroy(object1, object2){
+        console.log("destroy")
+        object1.destroy();
     }
 
 
