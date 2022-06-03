@@ -14,7 +14,7 @@ const config = {
             debug: true,
         },
     },
-    scene: new Tableau1(),
+    scene: [Tableau1,UI]
 };
 
 const game = new Phaser.Game(config);
