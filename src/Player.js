@@ -114,7 +114,7 @@ class Player {
     stop(){
         this._player.setVelocityX(0);
         if (this._player.body.onFloor()) {
-            this._player.play('idle',true)
+            this._player.play('idleAnim',true)
         }
     }
 

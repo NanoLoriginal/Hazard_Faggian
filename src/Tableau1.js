@@ -7,6 +7,7 @@ class Tableau1 extends Phaser.Scene {
         this.load.image('ciel', 'assets/images/ciel_test.jpg');//effet de light
 
         this.load.spritesheet('run','photoshop/spritesheet_run.png',{frameWidth: 245, frameHeight: 317});
+        this.load.spritesheet('idle','photoshop/spritesheet_idle.png',{frameWidth: 244, frameHeight: 316});
 
         //this.load.image('spike', 'assets/images/spike.png');//on charge l'image de l'objet piques
         this.load.image('feu', 'assets/images/feu.png');
@@ -36,6 +37,19 @@ class Tableau1 extends Phaser.Scene {
 
             }),
             frameRate: 24,
+            repeat: -1,
+        });
+
+
+        this.anims.create({
+            key:'idleAnim',
+            frames: this.anims.generateFrameNames('idle', {
+
+                start: 0,
+                end: 5,
+
+            }),
+            frameRate: 12,
             repeat: -1,
         });
 
