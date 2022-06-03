@@ -23,8 +23,11 @@ class Tableau1 extends Phaser.Scene {
 
     create() {
 
+        //const cielImage = this.add.image(0, 0, 'ciel').setOrigin(0, 0);
+        //cielImage.setScale(30, 30);
+
         const backgroundImage = this.add.image(1200, 780, 'background').setOrigin(0, 0);
-        backgroundImage.setScale(1.6, 1.15);
+        backgroundImage.setScale(2, 1.15);
 
         const backgroundImage2 = this.add.image(6150, 0, 'background').setOrigin(0, 0);
         backgroundImage2.setScale(1.75, 1.7);
@@ -46,7 +49,7 @@ class Tableau1 extends Phaser.Scene {
         this.paralax1 = map.createLayer('paralax1', tileset_background);
 
         const lightEffectImage = this.add.image(1200, 780, 'light_effect').setOrigin(0, 0);
-        lightEffectImage.setScale(2.6, 2);
+        lightEffectImage.setScale(3, 2);
         lightEffectImage.setAlpha(0.4);
 
 
@@ -70,6 +73,7 @@ class Tableau1 extends Phaser.Scene {
         this.platformes = map.createLayer('platformes', tileset);
         this.murs = map.createLayer('murs', tileset);
         this.ventils = map.createLayer('ventils', tileset);
+        this.ventils.setAlpha(0.8);
         this.sol = map.createLayer('sol', tileset);
 
 
