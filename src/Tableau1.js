@@ -19,8 +19,8 @@ class Tableau1 extends Phaser.Scene {
 
     create() {
 
-        const backgroundImage = this.add.image(50, 50, 'background').setOrigin(0, 0);
-        backgroundImage.setScale(10, 10);
+        const backgroundImage = this.add.image(1200, 780, 'background').setOrigin(0, 0);
+        backgroundImage.setScale(1.6, 1.15);
 
 
         const map = this.make.tilemap({key: 'map'});
@@ -28,16 +28,21 @@ class Tableau1 extends Phaser.Scene {
         const tileset = map.addTilesetImage('tileset1_test', 'tiles');
 
 
+        this.auraLight2 = map.createLayer('aura_lumière2', tileset);
+        this.auraLight = map.createLayer('aura_lumière1', tileset);
 
-
-        this.sol = map.createLayer('sol', tileset);
-
-        this.decor1 = map.createLayer('décor', tileset);
+        this.fumeeFront = map.createLayer('fumée_front1', tileset);
+        this.fumeeFront2 = map.createLayer('fumée_front2', tileset);
+        this.fumeeFront3 = map.createLayer('fumée_front3', tileset);
         this.decor2 = map.createLayer('décor2', tileset);
+        this.decor1 = map.createLayer('décor', tileset);
         this.decor3 = map.createLayer('décor3', tileset);
-        this.murs = map.createLayer('murs', tileset);
+        this.cables = map.createLayer('cables_opacite', tileset);
+        this.fioles = map.createLayer('fioles_opacite', tileset);
         this.platformes = map.createLayer('platformes', tileset);
+        this.murs = map.createLayer('murs', tileset);
         this.ventils = map.createLayer('ventils', tileset);
+        this.sol = map.createLayer('sol', tileset);
 
 
 
