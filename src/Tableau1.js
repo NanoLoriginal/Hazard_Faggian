@@ -12,7 +12,7 @@ class Tableau1 extends Phaser.Scene {
         //this.load.image('spike', 'assets/images/spike.png');//on charge l'image de l'objet piques
         this.load.image('feu', 'assets/images/feu.png');
         // At last image must be loaded with its JSON
-        this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');//on charge le joueur
+        //this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');//on charge le joueur
 
         //this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');//on charge le tileset qui contient les éléments utilisés dans tiled
         this.load.image('tiles', 'assets/tilesets/tileset1_test.png');//on charge le tileset qui contient les éléments utilisés dans tiled
@@ -36,7 +36,7 @@ class Tableau1 extends Phaser.Scene {
                 end: 6,
 
             }),
-            frameRate: 24,
+            frameRate: 20,
             repeat: -1,
         });
 
@@ -49,7 +49,7 @@ class Tableau1 extends Phaser.Scene {
                 end: 5,
 
             }),
-            frameRate: 12,
+            frameRate: 6,
             repeat: -1,
         });
 

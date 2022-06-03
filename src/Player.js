@@ -10,7 +10,7 @@ class Player {
         this.scene=scene
         this.cameras=scene
 
-        this._player = this.scene.physics.add.sprite(1700, 1900, 'player');
+        this._player = this.scene.physics.add.sprite(1700, 1900, 'idle');
 
         this._player.setBounce(0.1);
         this._player.setCollideWorldBounds(false);
@@ -30,32 +30,7 @@ class Player {
         });
 
 
-        this.scene.anims.create({
-            key: 'walk',
-            frames: this.scene.anims.generateFrameNames('player', {
-                prefix: 'robo_player_',
-                start: 2,
-                end: 3,
-            }),
-            frameRate: 10,
-            repeat: -1
-        });
-        this.scene.anims.create({
-            key: 'idle',
-            frames: [{key: 'player', frame: 'robo_player_0'}],
-            frameRate: 10,
-
-        });
-        this.scene.anims.create({
-            key: 'jump',
-            frames: [{key: 'player', frame: 'robo_player_1'}],
-            frameRate: 10,
-            repeat:-1,
-
-        });
-
-
-
+        this._player.setBodySize(150,300);
 
     }
 
@@ -91,7 +66,7 @@ class Player {
 
     jump(){
         this._player.setVelocityY(-this.playerVelocityY);
-        this._player.play('jump', true);
+        this._player.play('idleAnim', true);
     }
 
     moveRight(){
@@ -108,7 +83,7 @@ class Player {
     }
     moveDown(){
         this._player.setVelocityY(this.playerVelocityY)
-        this._player.play('jump', true);
+        this._player.play('idleAnim', true);
     }
 
     stop(){
