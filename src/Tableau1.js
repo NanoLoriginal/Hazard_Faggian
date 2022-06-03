@@ -4,6 +4,7 @@ class Tableau1 extends Phaser.Scene {
     preload() {
         this.load.image('background', 'assets/images/background_test.png');//image de fond
         this.load.image('light_effect', 'assets/images/light_effect.png');//effet de light
+        this.load.image('ciel', 'assets/images/ciel_test.jpg');//effet de light
 
         //this.load.image('spike', 'assets/images/spike.png');//on charge l'image de l'objet piques
         this.load.image('feu', 'assets/images/feu.png');
@@ -46,6 +47,12 @@ class Tableau1 extends Phaser.Scene {
 
         const lightEffectImage = this.add.image(1200, 780, 'light_effect').setOrigin(0, 0);
         lightEffectImage.setScale(2.6, 2);
+        lightEffectImage.setAlpha(0.4);
+
+
+        const lightEffectImage2 = this.add.image(6150, 0, 'light_effect').setOrigin(0, 0);
+        lightEffectImage2.setScale(2.8, 2.8);
+        lightEffectImage2.setAlpha(0.4);
 
 
 
