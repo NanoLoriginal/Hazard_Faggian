@@ -158,6 +158,7 @@ class Tableau1 extends Phaser.Scene {
         })
 
 
+
         this.Collider = this.physics.add.group({
             allowGravity: false,
             immovable: true,
@@ -228,10 +229,12 @@ class Tableau1 extends Phaser.Scene {
         this.swordHitBox.body.enable = false
         this.physics.world.remove(this.swordHitBox.body);
 
+        /**
         this.ennemyBox = this.add.rectangle(480,600,64,64,0xffffff,0.5);
         this.physics.add.existing(this.ennemyBox);
         console.log(this.ennemyBox.body);
         this.ennemyBox.body.setAllowGravity(false)
+         **/
 
         this.physics.add.overlap(this.swordHitBox, this.ennemi1.s, this.handleCollide, undefined, this);
         this.physics.add.collider(this.projectiles, this.ennemi1.s, this.projectileCollide, undefined, this);
@@ -412,9 +415,14 @@ class Tableau1 extends Phaser.Scene {
 
     update() {
 
+
         this.ennemi1.update()
 
+
         if(this.player.ActualForm==0){
+            if (playerEnergy<100){
+                playerEnergy+=1
+            }
 
             //if (this.cursors.left.isDown)
             if (this.leftKey.isDown)
@@ -461,6 +469,16 @@ class Tableau1 extends Phaser.Scene {
         }
 
         else{
+            if (playerEnergy>0){
+                playerEnergy-=2
+            }
+            else{
+                this.player.changeForm()
+                this.player.s.setTint(99999999);
+
+            }
+
+
             if (this.leftKey.isDown)
             {
                 this.player.moveLeft();
