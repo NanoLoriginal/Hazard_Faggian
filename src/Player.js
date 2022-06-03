@@ -60,9 +60,11 @@ class Player {
 
 
         this.scene.physics.world.add(this.scene.swordHitBox.body)
+        this.scene.swordHitBox.setVisible(true)
 
         this.scene.time.delayedCall(500,()=>{
             this.scene.physics.world.remove(this.scene.swordHitBox.body)
+            this.scene.swordHitBox.setVisible(false)
         })
 
     }

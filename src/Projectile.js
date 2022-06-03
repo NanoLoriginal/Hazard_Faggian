@@ -3,7 +3,7 @@ class Projectile {
     constructor(scene, x, y) {
 
         this.scene = scene;
-        const sprite = this.scene.physics.add.sprite(this.scene.player.s.x,this.scene.player.s.y,'greenP').setTexture('greenP').setDisplaySize(60, 60).setDepth(2000);
+        const sprite = this.scene.physics.add.sprite(this.scene.player.s.x,this.scene.player.s.y,'whiteP').setTexture('whiteP').setDisplaySize(60, 60).setDepth(2000);
         this.scene.projectiles.add(sprite)
         sprite.body.setAllowGravity(false);
         sprite.body.setMaxVelocityX(8000);

@@ -6,6 +6,7 @@ class Tableau1 extends Phaser.Scene {
         this.load.image('light_effect', 'assets/images/light_effect.png');//effet de light
         this.load.image('ciel', 'assets/images/ciel_test.jpg');
         this.load.image('enemy', 'assets/images/ennemi1.png');
+        this.load.image('fume', 'assets/images/cac.png');
 
         this.load.spritesheet('run','photoshop/spritesheet_run.png',{frameWidth: 245, frameHeight: 317});
         this.load.spritesheet('idle','photoshop/spritesheet_idle.png',{frameWidth: 244, frameHeight: 316});
@@ -13,6 +14,7 @@ class Tableau1 extends Phaser.Scene {
 
         this.load.image('vert', 'assets/images/particles/green-orb.png');
         this.load.image('greenP', 'assets/images/particles/green.png');
+        this.load.image('whiteP', 'assets/images/particles/white.png');
 
 
         //this.load.image('spike', 'assets/images/spike.png');//on charge l'image de l'objet piques
@@ -32,6 +34,10 @@ class Tableau1 extends Phaser.Scene {
 
 
     create() {
+
+
+
+
 
 
         this.anims.create({
@@ -202,7 +208,7 @@ class Tableau1 extends Phaser.Scene {
 
 
 
-        this.swordHitBox = this.add.rectangle(0,0,64,200,0xffffff,0);
+        this.swordHitBox = this.add.image(0,0,'fume');
         this.physics.add.existing(this.swordHitBox);
         console.log(this.swordHitBox.body);
         this.swordHitBox.body.setAllowGravity(false);
@@ -220,6 +226,15 @@ class Tableau1 extends Phaser.Scene {
         this.physics.add.collider(this.projectiles, this.Collider, this.projectileDestroy, undefined, this);
 
         this.resetBump = 0;
+
+        this.hit = this.add.particles('vert');
+        this.hit.createEmitter({
+            lifespan: 300,
+            speed: 150,
+            quantity: 200,
+            scale: { start: 0.2, end: 0 },
+            on: false
+        });
     }
 
     handleCollide(object1, object2){
@@ -238,7 +253,10 @@ class Tableau1 extends Phaser.Scene {
 
     projectileDestroy(object1, object2){
         console.log("destroy")
+        this.hit.emitParticleAt(object1.x,object1.y);
         object1.destroy();
+        window.objet_fragment += 25;
+
     }
 
 
@@ -288,8 +306,8 @@ class Tableau1 extends Phaser.Scene {
         console.log(playerHealth)
         if (playerHealth<0){
             player.setVelocity(0, 0);
-            player.setX(50);
-            player.setY(100);
+            player.setX(344);
+            player.setY(2224);
             player.play('idle', true);
             player.setAlpha(0);
             let tw = this.tweens.add({
@@ -299,6 +317,7 @@ class Tableau1 extends Phaser.Scene {
                 ease: 'linear',
                 repeat: 5,
             });
+            playerHealth = 100;
         }
     }
 
