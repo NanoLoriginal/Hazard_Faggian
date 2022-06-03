@@ -59,7 +59,7 @@ class Tableau1 extends Phaser.Scene {
         lightEffectImage2.setAlpha(0.4);
 
 
-
+        this.auraLight3 = map.createLayer('aura_lumière3', tileset);
         this.auraLight2 = map.createLayer('aura_lumière2', tileset);
         this.auraLight = map.createLayer('aura_lumière1', tileset);
 
