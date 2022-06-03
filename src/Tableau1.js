@@ -124,7 +124,13 @@ class Tableau1 extends Phaser.Scene {
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        this.changeFormKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
+        this.leftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+        this.rightKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+        this.downKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+
+        this.changeFormKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
+
         this.attackKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         this.player = new Player(this);
@@ -404,14 +410,16 @@ class Tableau1 extends Phaser.Scene {
         this.ennemi1.update()
 
         if(this.player.ActualForm==0){
-            if (this.cursors.left.isDown)
+
+            //if (this.cursors.left.isDown)
+            if (this.leftKey.isDown)
             {
                 if (this.resetBump === 0){
                     this.player.moveLeft();
                 }
 
             }
-            else if (this.cursors.right.isDown)
+            else if (this.rightKey.isDown)
             {
                 if (this.resetBump === 0){
                     this.player.moveRight();
@@ -426,7 +434,7 @@ class Tableau1 extends Phaser.Scene {
 
             }
 
-            if (this.cursors.up.isDown && this.player.s.body.onFloor())
+            if (this.jumpKey.isDown && this.player.s.body.onFloor())
             {
                 this.player.jump();
             }
@@ -438,18 +446,20 @@ class Tableau1 extends Phaser.Scene {
                 window.objet_fragment += 100;
             }
 
+            /**
             if(Phaser.Input.Keyboard.JustDown(this.attackKey)){
                 console.log("attaque");
                 this.player.swordAttack()
             }
+             **/
         }
 
         else{
-            if (this.cursors.left.isDown)
+            if (this.leftKey.isDown)
             {
                 this.player.moveLeft();
             }
-            else if (this.cursors.right.isDown)
+            else if (this.rightKey.isDown)
             {
                 this.player.moveRight();
             }
@@ -458,11 +468,11 @@ class Tableau1 extends Phaser.Scene {
                 this.player.stop();
             }
 
-            if (this.cursors.up.isDown)
+            if (this.jumpKey.isDown)
             {
                 this.player.jump();
             }
-            else if(this.cursors.down.isDown){
+            else if(this.downKey.isDown){
                 this.player.moveDown();
             }
             else{
