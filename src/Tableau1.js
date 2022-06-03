@@ -18,6 +18,7 @@ class Tableau1 extends Phaser.Scene {
 
         // Load the export Tiled JSON
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/Map1_test.json');
+
     }
 
 
@@ -194,7 +195,7 @@ class Tableau1 extends Phaser.Scene {
     playerHitEnnemi(player, ennemi) {
         this.resetBump = 1
         ennemi = this.ennemi1
-        console.log(this.player.playerHealth)
+        console.log(playerHealth)
 
         if (this.player.recovery === false){
 
@@ -207,7 +208,7 @@ class Tableau1 extends Phaser.Scene {
 
 
 
-            this.player.playerHealth = this.player.playerHealth - this.ennemi1.ennemiDamages;
+            playerHealth = playerHealth - this.ennemi1.ennemiDamages;
             player.setAlpha(0);
 
 
@@ -235,8 +236,8 @@ class Tableau1 extends Phaser.Scene {
             })
         }
 
-        console.log(this.player.playerHealth)
-        if (this.player.playerHealth<0){
+        console.log(playerHealth)
+        if (playerHealth<0){
             player.setVelocity(0, 0);
             player.setX(50);
             player.setY(100);

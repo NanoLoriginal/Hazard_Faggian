@@ -18,3 +18,5 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
+window.playerHealth = 100;
+window.playerEnergy = 100;

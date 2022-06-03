@@ -23,7 +23,7 @@ class Ennemi {
     }
 
     damagePlayer(player){
-        player.playerHealth = player.playerHealth - this.ennemiDamages;
-        console.log(player.playerHealth);
+        playerHealth = playerHealth - this.ennemiDamages;
+        console.log(playerHealth);
     }
 }

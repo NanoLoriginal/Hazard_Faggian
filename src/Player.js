@@ -20,7 +20,7 @@ class Player {
 
         this.ActualForm = 0;
 
-        this.playerHealth = 100;
+        playerHealth = 100;
         this.playerDamages = 20;
         this.recovery = false;
 

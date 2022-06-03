@@ -15,12 +15,22 @@ class UI extends Phaser.Scene {
         const healthBar = this.add.image(-50,-170,'health').setOrigin(0,0);
         healthBar.setScale(0.5,0.5);
 
+
+
         const energyBar = this.add.image(0,0,'energie').setOrigin(0,0);
         energyBar.setScale(0.3,0.3);
+
+        this.healthAmount = this.add.text(285,72,playerHealth, { font: '48px Arial', fill: '#ffffff' });
+        this.healthAmount.setScale(0.6,0.6);
+
+        this.energyAmount = this.add.text(80,45,playerEnergy, { font: '48px Arial', fill: '#ff0606' });
+        this.energyAmount.setScale(0.6,0.6);
+
 
     }
 
     update() {
-
+        this.healthAmount.setText(playerHealth);
+        this.energyAmount.setText(playerEnergy)
     }
 }
