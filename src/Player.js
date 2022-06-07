@@ -125,7 +125,8 @@ class Player {
         if (this.ActualForm === 0){
             this._player.setVelocity(0,0)
             this._player.body.setAllowGravity(false);
-            this.playerVelocityX = 680;
+            this.playerVelocityX = 800;
+            this.playerVelocityY = 800;
 
 
 
@@ -140,6 +141,7 @@ class Player {
         else{
             this._player.body.setAllowGravity(true);
             this.playerVelocityX = 600;
+            this.playerVelocityY = 640;
             this.allVentSprite.forEach(sprite=>{
                 sprite.body.enable=true
                 //sprite.body.enableBody()

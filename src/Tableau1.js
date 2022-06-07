@@ -421,7 +421,7 @@ class Tableau1 extends Phaser.Scene {
 
         if(this.player.ActualForm==0){
             if (playerEnergy<100){
-                playerEnergy+=1
+                playerEnergy+=0.5
             }
 
             //if (this.cursors.left.isDown)
@@ -470,7 +470,7 @@ class Tableau1 extends Phaser.Scene {
 
         else{
             if (playerEnergy>0){
-                playerEnergy-=2
+                playerEnergy-=0.5
             }
             else{
                 this.player.changeForm()
