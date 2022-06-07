@@ -9,8 +9,8 @@ class Projectile {
         sprite.body.setMaxVelocityX(8000);
         sprite.body.setMaxVelocityX(8000);
         this.scene.physics.moveTo(sprite,x,y);
-        sprite.setVelocity(sprite.body.velocity.x*10,sprite.body.velocity.y*10)
-        console.log("caca")
+        sprite.setVelocity(sprite.body.velocity.x*20,sprite.body.velocity.y*20)
+
 
         /**
         let particles = this.scene.add.particles('greenP');

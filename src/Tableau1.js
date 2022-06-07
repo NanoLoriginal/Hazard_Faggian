@@ -473,7 +473,7 @@ class Tableau1 extends Phaser.Scene {
 
         else{
             if (playerEnergy>0){
-                playerEnergy-=0.5
+                playerEnergy-=1
             }
             else{
                 this.player.changeForm()
