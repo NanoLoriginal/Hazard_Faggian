@@ -28,6 +28,7 @@ class Tableau1 extends Phaser.Scene {
         //this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');//on charge le tileset qui contient les éléments utilisés dans tiled
         this.load.image('tiles', 'assets/tilesets/tileset1_test.png');//on charge le tileset qui contient les éléments utilisés dans tiled
         this.load.image('tiles_back', 'assets/tilesets/tileset_background.png');//on charge le tileset qui contient les éléments utilisés dans tiled
+        this.load.image('tiles_back2', 'assets/images/background2.png');//on charge le tileset qui contient les éléments utilisés dans tiled
 
 
         // Load the export Tiled JSON
@@ -72,11 +73,11 @@ class Tableau1 extends Phaser.Scene {
         //const cielImage = this.add.image(0, 0, 'ciel').setOrigin(0, 0);
         //cielImage.setScale(30, 30);
 
-        const backgroundImage = this.add.image(1200, 780, 'background').setOrigin(0, 0);
-        backgroundImage.setScale(2, 1.15);
+        //const backgroundImage = this.add.image(1200, 780, 'background').setOrigin(0, 0);
+        //backgroundImage.setScale(2, 1.15);
 
-        const backgroundImage2 = this.add.image(6150, 0, 'background').setOrigin(0, 0);
-        backgroundImage2.setScale(1.75, 1.7);
+        //const backgroundImage2 = this.add.image(6150, 0, 'background').setOrigin(0, 0);
+        //backgroundImage2.setScale(1.75, 1.7);
 
 
 
@@ -86,8 +87,10 @@ class Tableau1 extends Phaser.Scene {
         const tileset = map.addTilesetImage('tileset1_test', 'tiles');
 
         const tileset_background = map.addTilesetImage('background_tileset', 'tiles_back');
+        const BackLayer = map.addTilesetImage('background2', 'tiles_back2');
 
 
+        this.Back = map.createLayer('Back', BackLayer);
         this.fond3 = map.createLayer('fond3', tileset_background);
         this.fond2 = map.createLayer('fond2', tileset_background);
         this.fond1 = map.createLayer('fond1', tileset_background);
