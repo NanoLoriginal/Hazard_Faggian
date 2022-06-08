@@ -23,6 +23,7 @@ class Player {
         playerHealth = 100;
         this.playerDamages = 20;
         this.recovery = false;
+        this.fireRate = 4;
 
 
 
@@ -109,7 +110,7 @@ class Player {
     fire(){
         if (game.time.now > this.nextFire && this.bullets.countDead() > 0)
         {
-            this.nextFire = game.time.now + fireRate;
+            this.nextFire = game.time.now + this.fireRate;
 
             var bullet = bullets.getFirstDead();
 

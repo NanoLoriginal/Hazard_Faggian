@@ -186,6 +186,11 @@ class Tableau1 extends Phaser.Scene {
             immovable: true,
         })
 
+        this.ColliderFin = this.physics.add.group({
+            allowGravity: false,
+            immovable: true,
+        })
+
         this.heal = this.physics.add.group({
             allowGravity: false,
             immovable: true,
@@ -218,6 +223,11 @@ class Tableau1 extends Phaser.Scene {
             this.allDeathZones.add(this.deathZone);
         })
 
+        map.getObjectLayer('fin').objects.forEach((fin)=>{
+            this.finZone = this.add.rectangle(fin.x+fin.width*0.5,fin.y+fin.height*0.5, fin.width, fin.height)
+            this.ColliderFin.add(this.finZone);
+        })
+
 
 
         console.log("test ici",this.ventilations.getChildren().filter(toto=>toto.name==="ventSprite"))
@@ -239,6 +249,8 @@ class Tableau1 extends Phaser.Scene {
         this.physics.add.collider(this.heal, this.Collider);
 
         this.physics.add.overlap(this.player.s, this.heal, this.collectHeal, null, this);
+
+        //this.physics.add.collider(this.player.s, this.ColliderFin,this.scene.start("menu1"),this);
 
 
 
