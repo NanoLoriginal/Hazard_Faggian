@@ -1,7 +1,7 @@
 class UI extends Phaser.Scene {
 
     constructor() {
-        super({key: 'UIScene', active: true});
+        super('UIScene');
     }
 
     preload() {

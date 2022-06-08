@@ -1,4 +1,7 @@
 class Tableau1 extends Phaser.Scene {
+    constructor(key) {
+        super('level');
+    }
 
 
     preload() {
@@ -38,6 +41,7 @@ class Tableau1 extends Phaser.Scene {
 
 
     create() {
+        Tableau1.current = this;
 
 
 
@@ -411,12 +415,15 @@ class Tableau1 extends Phaser.Scene {
             });
         }
 
+
+
     }
 
 
 
 
     update() {
+
 
 
         this.ennemi1.update()
