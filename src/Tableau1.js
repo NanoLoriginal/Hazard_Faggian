@@ -299,6 +299,7 @@ class Tableau1 extends Phaser.Scene {
         this.healed.emitParticleAt(heal.x,heal.y)
         heal.destroy();
         window.objet_fragment += 25;
+        playerHealth = 100;
     }
 
 
