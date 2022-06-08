@@ -13,6 +13,8 @@ class Tableau1 extends Phaser.Scene {
         this.load.image('fumee1', 'assets/images/smoke.png');
         this.load.image('touches', 'assets/images/touches.png');
         this.load.image('tuto1', 'assets/images/tuto1.png');
+        this.load.image('heal', 'assets/images/orbeSoin.png');
+        this.load.image('red', 'assets/images/red.png');
 
         this.load.spritesheet('run','photoshop/spritesheet_run.png',{frameWidth: 245, frameHeight: 317});
         this.load.spritesheet('idle','photoshop/spritesheet_idle.png',{frameWidth: 244, frameHeight: 316});
@@ -184,6 +186,13 @@ class Tableau1 extends Phaser.Scene {
             immovable: true,
         })
 
+        this.heal = this.physics.add.group({
+            allowGravity: false,
+            immovable: true,
+            key: 'heal',
+            setXY: { x: 5700, y: 2350}
+        });
+
 
         /**
         map.getObjectLayer('Spikes').objects.forEach((spike) => {
@@ -227,6 +236,11 @@ class Tableau1 extends Phaser.Scene {
         this.physics.add.collider(this.ennemi1.s, this.ventilations);
 
 
+        this.physics.add.collider(this.heal, this.Collider);
+
+        this.physics.add.overlap(this.player.s, this.heal, this.collectHeal, null, this);
+
+
 
         this.swordHitBox = this.add.image(0,0,'fume');
         this.physics.add.existing(this.swordHitBox);
@@ -262,14 +276,31 @@ class Tableau1 extends Phaser.Scene {
         this.transfo = this.add.particles('fumee1');
         this.transfo.createEmitter({
             lifespan: 400,
-            speed: 2000,
-            quantity: 1000,
-            scale: { start: 0.5, end: 0 },
+            speed: 1000,
+            quantity: 500,
+            scale: { start: 0.8, end: 0 },
+            on: false
+        });
+
+        this.healed = this.add.particles('heal');
+        this.healed.createEmitter({
+            lifespan: 400,
+            speed: 300,
+            quantity: 400,
+            scale: { start: 0.3, end: 0 },
             on: false
         });
 
 
     }
+
+    collectHeal (player, heal)
+    {
+        this.healed.emitParticleAt(heal.x,heal.y)
+        heal.destroy();
+        window.objet_fragment += 25;
+    }
+
 
     handleCollide(object1, object2){
         console.log("touché")
@@ -281,7 +312,9 @@ class Tableau1 extends Phaser.Scene {
     projectileCollide(object1, object2){
         console.log("touché")
         this.player.damageEnnemi(this.ennemi1)
+        this.hit.emitParticleAt(object1.x,object1.y);
         object2.destroy();
+        window.objet_fragment += 25;
 
     }
 
@@ -414,6 +447,8 @@ class Tableau1 extends Phaser.Scene {
                 repeat: 5,
             });
         }
+
+
 
 
 
